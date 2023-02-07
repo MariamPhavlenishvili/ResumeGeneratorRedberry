@@ -1,0 +1,159 @@
+@font-face {
+  font-family: Helvetica Neue;
+  src: url(../font/HelveticaNeue.ttc);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica Neue;
+  color: #1a1a1a;
+}
+
+.grid-container {
+  width: 1920px;
+  height: 1080px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1098px auto;
+}
+
+.grid-container div:first-child {
+  background-color: #f9f9f9;
+}
+
+.icon {
+  position: absolute;
+  top: 45px;
+  left: 45px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  margin-left: 150px;
+  margin-right: 150px;
+  font-weight: 400;
+  font-size: 20px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 47px;
+  padding-bottom: 12px;
+}
+
+.header-text {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+form {
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 77px;
+}
+
+.form-first-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-div {
+  margin-bottom: 54px;
+}
+
+.file-label {
+  padding-right: 19px;
+}
+
+.actual-btn {
+  display: inline-block;
+  width: 107px;
+  background-color: #0e80bf;
+  color: white;
+  padding: 10px 10px 12px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  color: #000000;
+  padding-bottom: 8px;
+}
+
+input,
+textarea {
+  position: relative;
+  font-family: Helvetica Neue;
+  font-style: normal;
+  outline: none;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+input:focus,
+textarea:focus {
+  border: 2px solid #bcbcbc;
+}
+
+input {
+  height: 48px;
+}
+
+input[type="text" i],
+input[type="email" i],
+input[type="tel" i],
+textarea {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 13px 16px 14px 16px;
+  color: #000000;
+}
+
+.Names {
+  width: 371px;
+}
+
+.submit {
+  width: 151px;
+  background-color: #6b40e3;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  float: right;
+}
+
+.warning {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  color: #2e2e2e;
+  padding-top: 8px;
+}
