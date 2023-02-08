@@ -1,12 +1,16 @@
 @font-face {
   font-family: Helvetica Neue;
-  src: url(./font/HelveticaNeue.ttc);
+  src: url(../font/HelveticaNeue.ttc);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+	all: unset;
 }
 
 html {
@@ -16,7 +20,7 @@ html {
 body {
   position: relative;
   background-size: 100%;
-  background-image: url(./img/background.png);
+  background-image: url(../img/background.png);
 }
 
 .header {
@@ -43,8 +47,7 @@ body {
   font-family: Helvetica Neue;
   font-weight: 500;
   font-size: 20px;
-  width: 464px;
-  padding: 18px 60px;
+  padding: 18px 126px;
   border-radius: 8px;
   background-color: #1a1a1a;
   color: #fff;
