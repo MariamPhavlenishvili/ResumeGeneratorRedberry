@@ -1,11 +1,13 @@
-import profile from "../img/profile.png";
+import { useState } from "react";
+
 import logo from "../img/ResumeLogo.png";
+
 
 import email from "../icons/email.svg";
 import phone from "../icons/mobile.svg";
 
 const Resume = ({ props }) => {
-  const info = { ...props };
+  const info = {...props}
 
   return (
     <>

@@ -139,6 +139,7 @@ textarea:focus {
 
 input {
   height: 48px;
+  width: 100%;
 }
 
 input[type="text" i],

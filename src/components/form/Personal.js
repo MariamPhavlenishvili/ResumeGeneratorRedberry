@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // import component
 import Resume from "../Resume";
@@ -16,18 +18,25 @@ const Personal = () => {
     formState: { errors },
   } = useForm();
 
-  const [file, setFile] = useState();
-  const [personalInfo, setPersonalInfo] = useState({
-    firstname: "",
-    lastname: "",
-    file: "",
-    about: "",
-    email: "",
-    phone: "",
-    firstnameError: "",
-    lastnameError: "",
-    fileError: "",
-  });
+  const [personalInfo, setPersonalInfo] = useState(
+    JSON.parse(localStorage.getItem("personalInfo")) || {
+      firstname: "",
+      lastname: "",
+      file: null,
+      about: "",
+      email: "",
+      phone: "",
+      firstnameError: "",
+      lastnameError: "",
+      fileError: "",
+    }
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("personalInfo", JSON.stringify(personalInfo));
+  }, [personalInfo]);
 
   const [istouched, setIsTouched] = useState({
     firstname: false,
@@ -48,7 +57,7 @@ const Personal = () => {
       [event.target.name]: event.target.value,
     });
 
-    if (event.target.name === "file") {
+    if (event.target.name === "file" && event.target.files.length !== 0) {
       setPersonalInfo({
         ...personalInfo,
         [event.target.name]: URL.createObjectURL(event.target.files[0]),
@@ -56,12 +65,23 @@ const Personal = () => {
     }
   };
 
-  const onAddImage = (e) => {
-    console.log(e.target.files[0])
-    setFile(URL.createObjectURL(e.target.files[0]));
-  };
+  const onSubmit = (data) => {
+    navigate('/experience');
 
-  const onSubmit = (data) => console.log(data);
+    data.preventDefault();
+    localStorage.removeItem("personalInfo");
+    setPersonalInfo({
+      firstname: "",
+      lastname: "",
+      file: null,
+      about: "",
+      email: "",
+      phone: "",
+      firstnameError: "",
+      lastnameError: "",
+      fileError: "",
+    });
+  };
 
   return (
     <>
@@ -90,6 +110,7 @@ const Personal = () => {
                       minLength: 2,
                       pattern: /^[ა-ჰ]+$/,
                     })}
+                    value={personalInfo.firstname}
                     onChange={onChange}
                     placeholder="ანზორ"
                     className={
@@ -117,6 +138,7 @@ const Personal = () => {
                       pattern: /^[ა-ჰ]+$/,
                     })}
                     placeholder="მულაძე"
+                    value={personalInfo.lastname}
                     onChange={onChange}
                     className={
                       istouched.lastname
@@ -135,11 +157,12 @@ const Personal = () => {
                 პირადი ფოტოს ატვირთვა
               </label>
               <input
-                onClick={onChange}
                 type="file"
                 {...register("file", {
                   required: true,
                 })}
+                onClick={onChange}
+                // value={personalInfo.file}
                 id="actual-btn"
                 hidden
               />
@@ -153,6 +176,7 @@ const Personal = () => {
                 {...register("about")}
                 cols="30"
                 rows="5"
+                value={personalInfo.about}
                 onChange={onChange}
                 placeholder="ზოგადი ინფო შენ შესახებ"
               ></textarea>
@@ -166,6 +190,7 @@ const Personal = () => {
                   pattern:
                     /([a-zA-Z0-9]+)([.{1}])?([a-zA-Z0-9]+)@redberry([.])ge/,
                 })}
+                value={personalInfo.email}
                 onChange={onChange}
                 placeholder="anzor666@redberry.ge"
               />
@@ -179,6 +204,7 @@ const Personal = () => {
                   required: true,
                   pattern: /^(\+995\d{2})(\d{3})(\d{2})(\d{2})$/,
                 })}
+                value={personalInfo.phone}
                 onChange={onChange}
                 placeholder="+995 551 12 34 56"
                 className={
