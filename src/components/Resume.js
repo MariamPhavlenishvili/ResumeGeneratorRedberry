@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import logo from "../img/ResumeLogo.png";
 
@@ -7,7 +7,19 @@ import email from "../icons/email.svg";
 import phone from "../icons/mobile.svg";
 
 const Resume = ({ props }) => {
-  const info = {...props}
+  const [info, setInfo] = useState({})
+
+
+  useEffect(() => {
+    if (props) {
+      setInfo(props)
+    }else {
+      const storedData = localStorage.getItem("data");
+      if (storedData) {
+        setInfo(JSON.parse(storedData))
+      }
+    }
+  }, [props]);
 
   return (
     <>

@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 // import component
 import Resume from "../Resume";
@@ -18,8 +17,8 @@ const Personal = () => {
     formState: { errors },
   } = useForm();
 
-  const [personalInfo, setPersonalInfo] = useState(
-    JSON.parse(localStorage.getItem("personalInfo")) || {
+  const [data, setData] = useState(
+    JSON.parse(localStorage.getItem("data")) || {
       firstname: "",
       lastname: "",
       file: null,
@@ -35,8 +34,8 @@ const Personal = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("personalInfo", JSON.stringify(personalInfo));
-  }, [personalInfo]);
+    localStorage.setItem("data", JSON.stringify(data));
+  }, [data]);
 
   const [istouched, setIsTouched] = useState({
     firstname: false,
@@ -52,25 +51,23 @@ const Personal = () => {
     );
     const regexPhoneNumber = new RegExp(/[+](995)?(79\d{7}|5\d{8})$/);
 
-    setPersonalInfo({
-      ...personalInfo,
+    setData({
+      ...data,
       [event.target.name]: event.target.value,
     });
 
     if (event.target.name === "file" && event.target.files.length !== 0) {
-      setPersonalInfo({
-        ...personalInfo,
+      setData({
+        ...data,
         [event.target.name]: URL.createObjectURL(event.target.files[0]),
       });
     }
   };
 
   const onSubmit = (data) => {
-    navigate('/experience');
-
-    data.preventDefault();
-    localStorage.removeItem("personalInfo");
-    setPersonalInfo({
+    navigate("/experience");
+    // localStorage.removeItem("data");
+    setData({
       firstname: "",
       lastname: "",
       file: null,
@@ -83,11 +80,15 @@ const Personal = () => {
     });
   };
 
+  const removeData = () => {
+    localStorage.removeItem("data");
+  }
+
   return (
     <>
       <div className="grid-container">
         <div className="form-generator">
-          <a href="/" className="icon">
+          <a href="/" className="icon" onClick={removeData}>
             <img src={arrow} alt="Your SVG" className="svg" />
           </a>
           <header>
@@ -96,8 +97,8 @@ const Personal = () => {
               <div>1/3</div>
             </div>
           </header>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-first-row">
+          <form onSubmit={handleSubmit(onSubmit)} className="content">
+            <div className="flex-container">
               <div className="form-div form-content">
                 <label htmlFor="fname" type="text">
                   სახელი
@@ -110,12 +111,12 @@ const Personal = () => {
                       minLength: 2,
                       pattern: /^[ა-ჰ]+$/,
                     })}
-                    value={personalInfo.firstname}
+                    value={data.firstname}
                     onChange={onChange}
                     placeholder="ანზორ"
                     className={
                       istouched.firstname
-                        ? personalInfo.firstnameError || !personalInfo.firstname
+                        ? data.firstnameError || !data.firstname
                           ? "wrong"
                           : "correct"
                         : "Names"
@@ -138,11 +139,11 @@ const Personal = () => {
                       pattern: /^[ა-ჰ]+$/,
                     })}
                     placeholder="მულაძე"
-                    value={personalInfo.lastname}
+                    value={data.lastname}
                     onChange={onChange}
                     className={
                       istouched.lastname
-                        ? personalInfo.lastnameError || !personalInfo.lastname
+                        ? data.lastnameError || !data.lastname
                           ? "wrong"
                           : "correct"
                         : "Names"
@@ -152,7 +153,7 @@ const Personal = () => {
                 {<p className="warning">მინიმუმ 2 ასო, ქართული ასოები</p>}
               </div>
             </div>
-            <div className="form-div">
+            <div className="form-div upload">
               <label htmlFor="fupload" className="file-label">
                 პირადი ფოტოს ატვირთვა
               </label>
@@ -162,7 +163,7 @@ const Personal = () => {
                   required: true,
                 })}
                 onClick={onChange}
-                // value={personalInfo.file}
+                // value={data.file}
                 id="actual-btn"
                 hidden
               />
@@ -176,7 +177,7 @@ const Personal = () => {
                 {...register("about")}
                 cols="30"
                 rows="5"
-                value={personalInfo.about}
+                value={data.about}
                 onChange={onChange}
                 placeholder="ზოგადი ინფო შენ შესახებ"
               ></textarea>
@@ -190,7 +191,7 @@ const Personal = () => {
                   pattern:
                     /([a-zA-Z0-9]+)([.{1}])?([a-zA-Z0-9]+)@redberry([.])ge/,
                 })}
-                value={personalInfo.email}
+                value={data.email}
                 onChange={onChange}
                 placeholder="anzor666@redberry.ge"
               />
@@ -204,12 +205,12 @@ const Personal = () => {
                   required: true,
                   pattern: /^(\+995\d{2})(\d{3})(\d{2})(\d{2})$/,
                 })}
-                value={personalInfo.phone}
+                value={data.phone}
                 onChange={onChange}
                 placeholder="+995 551 12 34 56"
                 className={
                   istouched.phone
-                    ? personalInfo.phoneError || !personalInfo.phone
+                    ? data.phoneError || !data.phone
                       ? "wrong"
                       : "correct"
                     : ""
@@ -223,7 +224,7 @@ const Personal = () => {
             <input type="submit" value="შემდეგი" className="submit" />
           </form>
         </div>
-        <Resume props={personalInfo} />
+        <Resume props={data} />
       </div>
     </>
   );

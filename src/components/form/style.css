@@ -47,6 +47,7 @@ header {
   font-weight: 400;
   font-size: 20px;
   border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 77px;
 }
 
 .header-content {
@@ -61,18 +62,18 @@ header {
   font-size: 24px;
 }
 
-form {
+
+.content {
   margin-left: 150px;
   margin-right: 150px;
-  margin-top: 77px;
 }
 
-.form-first-row {
+.flex-container {
   display: flex;
   justify-content: space-between;
 }
 
-.form-first-row input {
+.flex-container input {
   width: 371px;
 }
 
@@ -82,7 +83,7 @@ form {
 }
 
 .form-div {
-  margin-bottom: 54px;
+  margin-bottom: 31px;
 }
 
 .file-label {
@@ -145,6 +146,7 @@ input {
 input[type="text" i],
 input[type="email" i],
 input[type="tel" i],
+input[type="date" i],
 textarea {
   font-size: 16px;
   font-weight: 400;
@@ -161,10 +163,21 @@ textarea {
   float: right;
 }
 
-.submit:hover {
+.back {
+  width: 113px;
+  background-color: #6b40e3;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  float: left;
+}
+
+.submit:hover,
+.back:hover {
   background-color: #7949FF;
 }
 
+.submit:active,
 .submit:active {
   background-color: #512FAF;
 }
@@ -221,4 +234,30 @@ h3 {
 
 .contact {
   margin-bottom: 24px;
+}
+
+hr {
+  border: 1px solid #C1C1C1;
+  margin-bottom: 37px;
+}
+
+.add-button {
+  width: 289px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #62A1EB;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 115px;
+  margin-top: 0;
+}
+
+.textbox {
+  margin-bottom: 27px;
+}
+
+.upload {
+  padding: 23px 0;
 }
