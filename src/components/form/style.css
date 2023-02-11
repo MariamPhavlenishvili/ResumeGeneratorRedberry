@@ -15,11 +15,10 @@ body {
 }
 
 .grid-container {
-  margin: auto;
+  margin: auto 0;
   display: grid;
-  width: 1920px;
   height: 1080px;
-  grid-template-columns: 1098px auto;
+  grid-template-columns: 1090px auto;
 }
 
 .form-generator {
@@ -41,7 +40,7 @@ body {
   align-items: center;
 }
 
-header {
+.form-header {
   margin-left: 150px;
   margin-right: 150px;
   font-weight: 400;
@@ -70,11 +69,12 @@ header {
 
 .flex-container {
   display: flex;
+  
   justify-content: space-between;
 }
 
 .flex-container input {
-  width: 371px;
+  width: 370px;
 }
 
 .form-content {
@@ -161,6 +161,7 @@ textarea {
   text-align: center;
   font-size: 16px;
   float: right;
+  cursor: pointer;
 }
 
 .back {
@@ -170,6 +171,7 @@ textarea {
   text-align: center;
   font-size: 16px;
   float: left;
+  cursor: pointer;
 }
 
 .submit:hover,
@@ -197,7 +199,9 @@ textarea {
 }
 
 .resume {
+  display: inline-block;
   background-color: #fff;
+  width: 822px;
   padding: 48px 80px;
 }
 
@@ -219,8 +223,8 @@ h3 {
 }
 
 .profile img {
-  width: 246px;
-  height: 246px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   float: right;
 }
@@ -260,4 +264,52 @@ hr {
 
 .upload {
   padding: 23px 0;
+}
+
+.text {
+  margin-bottom: 15px;
+}
+
+.line {
+  margin-bottom: 24px;
+}
+
+.resume-flex {
+  display: flex;
+  padding-bottom: 7px;
+}
+
+.position-employer {
+  font-weight: 700;
+}
+
+.position-employer:not(:first-child):before {
+  content: ", ";
+}
+
+.dates{
+  display: flex;
+  margin-bottom: 15px;
+  font-style: italic;
+  font-weight: 400;
+  color: #909090;
+}
+
+.date:not(:first-child):before {
+  content: " - ";
+}
+
+.about {
+  display: inline-block;
+  width: 432px;
+}
+
+.description p{
+  display: inline-block;
+  width: 660px;
+}
+
+.about p,
+.description p {
+  width: fit-content;
 }

@@ -2,21 +2,26 @@ import { useState, useEffect } from "react";
 
 import logo from "../img/ResumeLogo.png";
 
-
 import email from "../icons/email.svg";
 import phone from "../icons/mobile.svg";
 
 const Resume = ({ props }) => {
-  const [info, setInfo] = useState({})
-
+  const [info, setInfo] = useState({});
 
   useEffect(() => {
     if (props) {
-      setInfo(props)
-    }else {
-      const storedData = localStorage.getItem("data");
+      if (props["personalInfo"]) {
+        setInfo({ ...info, personalInfo: props["personalInfo"] });
+      }
+      if (props["experience"]) {
+        const storedData = JSON.parse(localStorage.getItem("data"));
+        setInfo({ ...storedData, experience: props["experience"] });
+        console.log(info);
+      }
+    } else {
+      const storedData = JSON.parse(localStorage.getItem("data"));
       if (storedData) {
-        setInfo(JSON.parse(storedData))
+        setInfo({ ...info, storedData });
       }
     }
   }, [props]);
@@ -24,35 +29,66 @@ const Resume = ({ props }) => {
   return (
     <>
       <div className="resume">
-        {info.file && (
+        {info?.personalInfo?.file && (
           <div className="profile">
-            <img src={info.file} alt="profile pic" />
+            <img src={info?.perrsonal?.file} alt="profile pic" />
           </div>
         )}
         <div className="first-last-name">
-          {info.firstname && <h1>{info.firstname}</h1>}
-          {info.lastname && <h1>{info.lastname}</h1>}
+          {info?.personalInfo?.firstname && (
+            <h1>{info.personalInfo.firstname}</h1>
+          )}
+          {info?.personalInfo?.lastname && (
+            <h1>{info.personalInfo.lastname}</h1>
+          )}
         </div>
         <div className="contact">
-          {info.email && (
+          {info?.personalInfo?.email && (
             <div className="email">
               <img src={email} alt="email icon" c />
-              <p>{info.email}</p>
+              <p>{info?.personalInfo?.email}</p>
             </div>
           )}
-          {info.phone && (
+          {info?.personalInfo?.phone && (
             <div className="mobile">
               <img src={phone} alt="phone icon" />
-              <p>{info.phone}</p>
+              <p>{info?.personalInfo?.phone}</p>
             </div>
           )}
         </div>
-        {info.about && (
-          <div>
+        {info?.personalInfo?.about && (
+          <div className="text about">
             <h3>ჩემ შესახებ</h3>
-            <p>{info.about}</p>
+            <p>{info?.personalInfo?.about}</p>
           </div>
         )}
+        {info?.experience?.map((data) => (
+          <div key={data.id}>
+            <>
+              <hr className="line" />
+              {data?.position && (
+                <>
+                  <h3>გამოცდილება</h3>
+                  <div className="resume-flex">
+                    <div className="position-employer">{data?.position}</div>
+                    <div className="position-employer">{data?.employer}</div>
+                  </div>
+                </>
+              )}
+              {(data?.startDate || data?.endDate) && (
+                <div className="dates">
+                  <span className="date">{data?.startDate} </span>
+                  <span className="date">{data?.endDate}</span>
+                </div>
+              )}
+              {data?.description && (
+                <div className="text description">
+                  {data?.description}
+                </div>
+              )}
+            </>
+          </div>
+        ))}
       </div>
     </>
   );

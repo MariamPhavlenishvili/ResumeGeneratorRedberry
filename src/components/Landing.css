@@ -17,11 +17,11 @@ html {
   font-family: sans-serif;
 }
 
-body {
+/* body {
   position: relative;
   background-size: 100%;
   background-image: url(../img/background.png);
-}
+} */
 
 .header {
   position: absolute;
@@ -35,22 +35,29 @@ body {
 }
 
 .container {
+  position: relative;
+  background-size: 100%;
+  background-image: url(../img/background.png);
   margin: 0 auto;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.btn {
+.center {
   position: absolute;
-  font-family: Helvetica Neue;
-  font-weight: 500;
-  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
   padding: 18px 126px;
   border-radius: 8px;
   background-color: #1a1a1a;
   color: #fff;
+}
+
+.btn {
+  font-family: Helvetica Neue;
+  font-weight: 500;
+  font-size: 20px;
   cursor: pointer;
 }
 

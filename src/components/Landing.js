@@ -7,17 +7,21 @@ import logo from "../img/LOGO-40.png";
 function Landing() {
   return (
     <>
-      <header>
-        <div className="header">
-          <img src={redberry} alt="Redberry Logo" className="redberryLogo" />
-        </div>
-      </header>
       <div className="container">
+        <header>
+          <div className="header">
+            <img src={redberry} alt="Redberry Logo" className="redberryLogo" />
+          </div>
+        </header>
         <img src={logo} alt="Stamp Logo" className="logo" />
-        <Link to="/personal-info" className="btn">რეზიუმეს დამატება</Link>
+        <div className="center">
+          <Link to="/personal-info" className="btn">
+            რეზიუმეს დამატება
+          </Link>
+        </div>
       </div>
     </>
   );
 }
 
-export default Landing
+export default Landing;

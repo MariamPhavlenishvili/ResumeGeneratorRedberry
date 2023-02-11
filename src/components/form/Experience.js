@@ -1,12 +1,39 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Resume from "../Resume";
 
 import "./style.css";
 import arrow from "../../icons/Vector.svg";
 
-const Experience = (props) => {
+const Experience = () => {
+  const storedData = JSON.parse(localStorage.getItem("data"));
+
+  const navigate = useNavigate();
+
   const [formCount, setFormCount] = useState(1);
+  const [data, setData] = useState({
+    personalInfo: storedData.personalInfo,
+    experience: [
+      {
+        id: 1,
+        position: "",
+        employer: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+      },
+    ],
+  });
+
+  console.log(data);
+
+  useEffect(() => {
+    if (storedData.experience) {
+      setData(storedData);
+    }
+    // localStorage.setItem("data", JSON.stringify(data));
+  }, []);
 
   const removeData = () => {
     localStorage.removeItem("data");
@@ -14,6 +41,42 @@ const Experience = (props) => {
 
   const handleClick = () => {
     setFormCount(formCount + 1);
+    setData({
+      ...data,
+      experience: [
+        ...data.experience,
+        {
+          id: formCount + 1,
+          position: "",
+          employer: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+        },
+      ],
+    });
+  };
+
+  const handleChange = (e, id) => {
+    const updatedForms = data.experience.map((form) => {
+      if (form.id === id) {
+        return { ...form, [e.target.name]: e.target.value };
+      }
+      return form;
+    });
+    setData({ ...data, experience: updatedForms });
+    localStorage.setItem("data", JSON.stringify(data));
+    console.log(data);
+  };
+
+  const onSubmit = () => {
+    localStorage.setItem("data", JSON.stringify(data));
+    navigate("/education");
+  };
+
+  const onBack = () => {
+    localStorage.setItem("data", JSON.stringify(data));
+    navigate("/personal-info");
   };
 
   return (
@@ -22,60 +85,41 @@ const Experience = (props) => {
         <a href="/" className="icon" onClick={removeData}>
           <img src={arrow} alt="Your SVG" className="svg" />
         </a>
-        <header>
+        <header className="form-header">
           <div className="header-content">
             <div className="header-text">გამოცდილება</div>
             <div>2/3</div>
           </div>
         </header>
-        {Array.from({ length: formCount }, (_, i) => (
-          <div key={i}>
-            <Form id={formCount}/>
-          </div>
+        {data.experience.map((form) => (
+          <Form key={form.id} form={form} onChange={handleChange} />
         ))}
         <div className="content">
           <button className="add-button" onClick={handleClick}>
             მეტი გამოცდილების დამატება
           </button>
           <div className="buttons">
-            <input type="submit" value="შემდეგი" className="submit" />
-            <input type="back" value="უკან" className="back" />
+            <input
+              type="submit"
+              value="შემდეგი"
+              className="submit"
+              onClick={onSubmit}
+            />
+            <input type="back" value="უკან" className="back" onClick={onBack} />
           </div>
         </div>
       </div>
-      <Resume />
+      <Resume props={data} />
     </div>
   );
 };
 
-const Form = ({ id }) => {
+const Form = ({ form, onChange }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const [data, setData] = useState(
-    JSON.parse(localStorage.getItem("data")) || [{
-      id: 1,
-      position: "",
-      employer: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-    }]
-  );
-
-  const onChange = (event) => {
-    setData([
-      ...data,
-      {id:id, [event.target.name]: event.target.value},
-    ]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(data));
-  }, [data]);
 
   return (
     <form action="" className="content">
@@ -90,8 +134,8 @@ const Form = ({ id }) => {
               required: true,
               minLength: 2,
             })}
-            onChange={onChange}
-            value={data.position}
+            onChange={(e) => onChange(e, form.id)}
+            value={form.position}
             placeholder="დეველოპერი, დიზაინერი, ა."
           />
         </div>
@@ -108,8 +152,8 @@ const Form = ({ id }) => {
               required: true,
               minLength: 2,
             })}
-            onChange={onChange}
-            value={data.employer}
+            defaultValue={form.employer}
+            onChange={(e) => onChange(e, form.id)}
             placeholder="დამსაქმებელი"
           />
         </div>
@@ -121,8 +165,8 @@ const Form = ({ id }) => {
           <input
             type="date"
             {...register("startDate", { required: true })}
-            onChange={onChange}
-            value={data.startDate}
+            defaultValue={form.startDate}
+            onChange={(e) => onChange(e, form.id)}
             placeholder="mm / dd / yyyy"
           />
         </div>
@@ -131,21 +175,21 @@ const Form = ({ id }) => {
           <input
             type="date"
             {...register("endDate", { required: true })}
-            onChange={onChange}
-            value={data.endDate}
+            defaultValue={form.endDate}
+            onChange={(e) => onChange(e, form.id)}
             placeholder="mm / dd / yyyy"
           />
         </div>
       </div>
       <div className="form-div form-content ">
-        <label htmlFor="describtion">აღწერა</label>
+        <label htmlFor="description">აღწერა</label>
         <textarea
-          {...register("describtion", { required: true })}
+          {...register("description", { required: true })}
           className="textbox"
           cols="30"
           rows="5"
-          onChange={onChange}
-          value={data.description}
+          defaultValue={form.description}
+          onChange={(e) => onChange(e, form.id)}
           placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
         ></textarea>
       </div>
