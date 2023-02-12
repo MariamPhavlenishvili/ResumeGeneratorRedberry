@@ -106,13 +106,15 @@ body {
 
 label {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 21px;
   color: #000000;
   padding-bottom: 8px;
 }
 
 input,
+select,
+button,
 textarea {
   position: relative;
   font-family: Helvetica Neue;
@@ -125,6 +127,7 @@ textarea {
 }
 
 input:focus,
+select:focus,
 textarea:focus {
   border: 2px solid #bcbcbc;
 }
@@ -138,6 +141,11 @@ textarea:focus {
   border: 1px solid #98E37E;
 }
 
+select {
+  width: 370px;
+  height: 48px;
+}
+
 input {
   height: 48px;
   width: 100%;
@@ -147,12 +155,13 @@ input[type="text" i],
 input[type="email" i],
 input[type="tel" i],
 input[type="date" i],
+select,
 textarea {
   font-size: 16px;
   font-weight: 400;
   padding: 13px 16px 14px 16px;
-  color: #000000;
 }
+
 
 .submit {
   width: 151px;
@@ -160,8 +169,11 @@ textarea {
   color: #fff;
   text-align: center;
   font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
   float: right;
   cursor: pointer;
+  padding: 18px;
 }
 
 .back {
@@ -170,8 +182,11 @@ textarea {
   color: #fff;
   text-align: center;
   font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
   float: left;
   cursor: pointer;
+  padding: 18px;
 }
 
 .submit:hover,
@@ -254,8 +269,9 @@ hr {
   color: #fff;
   border: none;
   border-radius: 4px;
-  margin-bottom: 115px;
   margin-top: 0;
+  margin-bottom: 100px;
+  cursor: pointer;
 }
 
 .textbox {
@@ -312,4 +328,9 @@ hr {
 .about p,
 .description p {
   width: fit-content;
+}
+.buttons {
+  display: flex;
+  gap:535px;
+  margin-bottom: 65px;
 }

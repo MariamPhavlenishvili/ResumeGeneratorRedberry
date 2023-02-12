@@ -29,6 +29,7 @@ const Personal = () => {
       },
     }
   );
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -50,17 +51,29 @@ const Personal = () => {
         [event.target.name]: event.target.value,
       },
     });
+  };
 
-    if (event.target.name === "file" && event.target.files.length !== 0) {
-      const image = URL.createObjectURL(event.target.files[0]);
-      setData({
-        ...data,
-        personalInfo: {
-          ...data.personalInfo,
-          [event.target.name]: URL.createObjectURL(event.target.files[0]),
-        },
-      });
-    }
+  const convertBlobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        resolve(base64data);
+      };
+      reader.onerror = reject;
+    });
+  };
+
+  const onChangeImage = (event) => {
+    const file = event.target.files[0];
+    setData({
+      ...data,
+      personalInfo: {
+        ...data.personalInfo,
+        file: file,
+      },
+    });
   };
 
   const onSubmit = (data) => {
@@ -147,7 +160,7 @@ const Personal = () => {
                 {...register("file", {
                   required: true,
                 })}
-                onClick={onChange}
+                onChange={onChangeImage}
                 // value={data.personalInfo.file}
                 id="actual-btn"
                 hidden
@@ -199,7 +212,9 @@ const Personal = () => {
                 უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
               </p>
             </div>
-            <input type="submit" value="შემდეგი" className="submit" />
+            <button className="submit" onClick={onSubmit} type={"submit"}>
+              შემდეგი
+            </button>
           </form>
         </div>
         <Resume props={data} />

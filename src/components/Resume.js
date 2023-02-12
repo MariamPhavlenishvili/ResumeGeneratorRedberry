@@ -7,16 +7,36 @@ import phone from "../icons/mobile.svg";
 
 const Resume = ({ props }) => {
   const [info, setInfo] = useState({});
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [mobileNumber, setMobileNumber] = useState("")
 
   useEffect(() => {
     if (props) {
       if (props["personalInfo"]) {
         setInfo({ ...info, personalInfo: props["personalInfo"] });
+
+        // if (props["personalInfo"].file) {
+        //   let reader = new FileReader();
+        //   let file = props["personalInfo"]?.file;
+        //   reader.onloadend = () => {
+        //     setImagePreviewUrl(reader.result);
+        //   };
+        //   reader.readAsDataURL(file);
+        // }
+
+        if (props["personalInfo"].phone) {
+          const phone = props["personalInfo"].phone
+          const formattedNumber = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5");
+          setMobileNumber(formattedNumber)
+        }
       }
       if (props["experience"]) {
         const storedData = JSON.parse(localStorage.getItem("data"));
         setInfo({ ...storedData, experience: props["experience"] });
-        console.log(info);
+      }
+      if (props["education"]) {
+        const storedData = JSON.parse(localStorage.getItem("data"));
+        setInfo({ ...storedData, education: props["education"] });
       }
     } else {
       const storedData = JSON.parse(localStorage.getItem("data"));
@@ -29,11 +49,11 @@ const Resume = ({ props }) => {
   return (
     <>
       <div className="resume">
-        {info?.personalInfo?.file && (
+        {/* {info?.personalInfo?.file && (
           <div className="profile">
-            <img src={info?.perrsonal?.file} alt="profile pic" />
+            <img src={imagePreviewUrl} alt="profile pic" />
           </div>
-        )}
+        )} */}
         <div className="first-last-name">
           {info?.personalInfo?.firstname && (
             <h1>{info.personalInfo.firstname}</h1>
@@ -52,7 +72,7 @@ const Resume = ({ props }) => {
           {info?.personalInfo?.phone && (
             <div className="mobile">
               <img src={phone} alt="phone icon" />
-              <p>{info?.personalInfo?.phone}</p>
+              <p>{mobileNumber}</p>
             </div>
           )}
         </div>
@@ -82,9 +102,31 @@ const Resume = ({ props }) => {
                 </div>
               )}
               {data?.description && (
-                <div className="text description">
-                  {data?.description}
+                <div className="text description">{data?.description}</div>
+              )}
+            </>
+          </div>
+        ))}
+        {info?.education?.map((data) => (
+          <div key={data.id}>
+            <>
+              <hr className="line" />
+              {(data?.school || data?.degree) && (
+                <>
+                  <h3>განათლება</h3>
+                  <div className="resume-flex">
+                    <div className="position-employer">{data?.school}</div>
+                    <div className="position-employer">{data?.degree}</div>
+                  </div>
+                </>
+              )}
+              {data?.endDate && (
+                <div className="dates">
+                  <span className="date">{data?.endDate}</span>
                 </div>
+              )}
+              {data?.description && (
+                <div className="text description">{data?.description}</div>
               )}
             </>
           </div>
