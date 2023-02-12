@@ -8,26 +8,21 @@ import phone from "../icons/mobile.svg";
 const Resume = ({ props }) => {
   const [info, setInfo] = useState({});
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
-  const [mobileNumber, setMobileNumber] = useState("")
+  const [mobileNumber, setMobileNumber] = useState("");
 
   useEffect(() => {
     if (props) {
+      console.log("test");
       if (props["personalInfo"]) {
         setInfo({ ...info, personalInfo: props["personalInfo"] });
 
-        // if (props["personalInfo"].file) {
-        //   let reader = new FileReader();
-        //   let file = props["personalInfo"]?.file;
-        //   reader.onloadend = () => {
-        //     setImagePreviewUrl(reader.result);
-        //   };
-        //   reader.readAsDataURL(file);
-        // }
-
         if (props["personalInfo"].phone) {
-          const phone = props["personalInfo"].phone
-          const formattedNumber = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5");
-          setMobileNumber(formattedNumber)
+          const phone = props["personalInfo"].phone;
+          const formattedNumber = phone.replace(
+            /(\d{3})(\d{3})(\d{2})(\d{2})(\d{2})/,
+            "$1 $2 $3 $4 $5"
+          );
+          setMobileNumber(formattedNumber);
         }
       }
       if (props["experience"]) {
@@ -39,6 +34,7 @@ const Resume = ({ props }) => {
         setInfo({ ...storedData, education: props["education"] });
       }
     } else {
+      console.log("test1")
       const storedData = JSON.parse(localStorage.getItem("data"));
       if (storedData) {
         setInfo({ ...info, storedData });
@@ -49,11 +45,11 @@ const Resume = ({ props }) => {
   return (
     <>
       <div className="resume">
-        {/* {info?.personalInfo?.file && (
+        {info?.personalInfo?.file && (
           <div className="profile">
-            <img src={imagePreviewUrl} alt="profile pic" />
+            <img src={info?.personalInfo?.file} alt="profile pic" />
           </div>
-        )} */}
+        )}
         <div className="first-last-name">
           {info?.personalInfo?.firstname && (
             <h1>{info.personalInfo.firstname}</h1>
@@ -79,14 +75,14 @@ const Resume = ({ props }) => {
         {info?.personalInfo?.about && (
           <div className="text about">
             <h3>ჩემ შესახებ</h3>
-            <p>{info?.personalInfo?.about}</p>
+            <p className="paragraph">{info?.personalInfo?.about}</p>
           </div>
         )}
         {info?.experience?.map((data) => (
           <div key={data.id}>
             <>
               <hr className="line" />
-              {data?.position && (
+              {(data?.position || data?.employer) && (
                 <>
                   <h3>გამოცდილება</h3>
                   <div className="resume-flex">

@@ -173,7 +173,6 @@ textarea {
   letter-spacing: 1px;
   float: right;
   cursor: pointer;
-  padding: 18px;
 }
 
 .back {
@@ -186,7 +185,6 @@ textarea {
   letter-spacing: 1px;
   float: left;
   cursor: pointer;
-  padding: 18px;
 }
 
 .submit:hover,
@@ -333,4 +331,8 @@ hr {
   display: flex;
   gap:535px;
   margin-bottom: 65px;
+}
+
+.paragraph {
+  width: 432px;
 }

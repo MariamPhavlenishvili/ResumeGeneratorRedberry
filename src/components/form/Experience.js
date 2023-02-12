@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+// import DatePicker from "react-datepicker";
 import Resume from "../Resume";
 
 import "./style.css";
@@ -98,9 +99,12 @@ const Experience = () => {
             <button className="back" onClick={onBack} type={"button"}>
               უკან
             </button>
-            <button className="submit" onClick={onSubmit} type={"submit"}>
-              შემდეგი
-            </button>
+            <input
+              className="submit"
+              onClick={onSubmit}
+              value={"შემდეგი"}
+              type="submit"
+            />
           </div>
         </div>
       </div>
@@ -159,20 +163,22 @@ const Form = ({ form, onChange }) => {
           <label htmlFor="startDate">დაწყების რიცხვი</label>
           <input
             type="date"
+            placeholder="mm / dd / yyyy"
+            pattern="\d{2}/\d{2}/\d{4}"
             {...register("startDate", { required: true })}
             value={form.startDate}
             onChange={(e) => onChange(e, form.id)}
-            placeholder="mm / dd / yyyy"
           />
         </div>
         <div className="form-div form-content">
           <label htmlFor="startDate">დამთავრების რიცხვი</label>
           <input
             type="date"
+            placeholder="mm / dd / yyyy"
+            pattern="\d{2}/\d{2}/\d{4}"
             {...register("endDate", { required: true })}
             value={form.endDate}
             onChange={(e) => onChange(e, form.id)}
-            placeholder="mm / dd / yyyy"
           />
         </div>
       </div>

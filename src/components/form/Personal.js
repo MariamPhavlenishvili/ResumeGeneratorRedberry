@@ -53,7 +53,7 @@ const Personal = () => {
     });
   };
 
-  const convertBlobToBase64 = (blob) => {
+  const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(blob);
@@ -65,13 +65,24 @@ const Personal = () => {
     });
   };
 
-  const onChangeImage = (event) => {
+  const onChangeImage = async (event) => {
     const file = event.target.files[0];
+    const base64 = await blobToBase64(file);
+    const binary = atob(base64.split(",")[1]);
+    const array = [];
+    for (let i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    const fileObject = new Blob([new Uint8Array(array)], {
+      type: file.type,
+    });
+    const fileUrl = URL.createObjectURL(fileObject);
+    console.log(fileUrl);
     setData({
       ...data,
       personalInfo: {
         ...data.personalInfo,
-        file: file,
+        file: fileUrl,
       },
     });
   };
@@ -212,9 +223,12 @@ const Personal = () => {
                 უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
               </p>
             </div>
-            <button className="submit" onClick={onSubmit} type={"submit"}>
-              შემდეგი
-            </button>
+            <input
+              className="submit"
+              onClick={onSubmit}
+              value={"შემდეგი"}
+              type="submit"
+            />
           </form>
         </div>
         <Resume props={data} />

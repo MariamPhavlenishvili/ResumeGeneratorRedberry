@@ -97,9 +97,12 @@ const Education = () => {
             <button className="back" onClick={onBack} type={"button"}>
               უკან
             </button>
-            <button className="submit" onClick={onSubmit} type={"submit"}>
-              დასრულება
-            </button>
+            <input
+              className="submit"
+              onClick={onSubmit}
+              value={"შემდეგი"}
+              type="submit"
+            />
           </div>
         </div>
       </div>
@@ -141,12 +144,8 @@ const Form = ({ form, onChange }) => {
           <select
             name="degree"
             onChange={(e) => onChange(e, form.id)}
-            defaultValue={"აირჩიეთ ხარისხი"}
-            value={form.degree}
+            value={form.degree ? form.degree : "აირჩიეთ ხარისხი"}
           >
-            <option value="none" selected disabled hidden>
-              აირჩიეთ ხარისხი
-            </option>
             <option value="საშუალო სკოლა">საშუალო სკოლა</option>
             <option value="ზოგადსაგანმანათლებლო დიპლომი">
               ზოგადსაგანმანათლებლო დიპლომი
@@ -164,10 +163,11 @@ const Form = ({ form, onChange }) => {
           <label htmlFor="startDate">დამთავრების რიცხვი</label>
           <input
             type="date"
-            {...register("endDate", { required: true })}
-            defaultValue={form.endDate}
-            onChange={(e) => onChange(e, form.id)}
             placeholder="mm / dd / yyyy"
+            pattern="\d{2}/\d{2}/\d{4}"
+            {...register("endDate", { required: true })}
+            value={form.endDate}
+            onChange={(e) => onChange(e, form.id)}
           />
         </div>
       </div>
@@ -178,7 +178,7 @@ const Form = ({ form, onChange }) => {
           className="textbox"
           cols="30"
           rows="5"
-          defaultValue={form.description}
+          value={form.description}
           onChange={(e) => onChange(e, form.id)}
           placeholder="განათლების აღწერა"
         ></textarea>
