@@ -10,14 +10,16 @@
 }
 
 body {
+  width: 1920px;
+  height: 1080px;
   font-family: Helvetica Neue;
   color: #1a1a1a;
 }
 
 .grid-container {
-  margin: auto 0;
   display: grid;
-  height: 1080px;
+  /* width: 1920px;
+  height: 1080px; */
   grid-template-columns: 1090px auto;
 }
 
@@ -69,7 +71,6 @@ body {
 
 .flex-container {
   display: flex;
-  
   justify-content: space-between;
 }
 
@@ -142,6 +143,8 @@ textarea:focus {
 }
 
 select {
+  cursor: pointer;
+  display: inline-block;
   width: 370px;
   height: 48px;
 }
@@ -212,9 +215,9 @@ textarea {
 }
 
 .resume {
-  display: inline-block;
   background-color: #fff;
-  width: 822px;
+  position: relative;
+  height: 1080px;
   padding: 48px 80px;
 }
 
@@ -280,8 +283,20 @@ hr {
   padding: 23px 0;
 }
 
+.about {
+  width: 430px;
+}
+
+.description {
+  width: 660px;
+}
+
+
 .text {
   margin-bottom: 15px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .line {
@@ -313,26 +328,64 @@ hr {
   content: " - ";
 }
 
-.about {
-  display: inline-block;
-  width: 432px;
-}
-
-.description p{
-  display: inline-block;
-  width: 660px;
-}
-
-.about p,
-.description p {
-  width: fit-content;
-}
 .buttons {
   display: flex;
   gap:535px;
   margin-bottom: 65px;
 }
 
-.paragraph {
-  width: 432px;
+.resume-logo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 44px 78px;
+}
+
+option:hover {
+  background-color: #C3DCEE;
+}
+
+.result-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.last-page-arrow {
+  background-color: #F9F9F9;
+}
+
+.submited-resume {
+  position: absolute;
+  height: 100vh;
+  width: 822px;
+  padding: 68px 80px;
+  left: calc(50% - 822px/2);
+  top: 54px;
+  border: 1px solid #000000;
+}
+
+.popup {
+  width: 427px;
+  height: 167px;
+  position: absolute;
+  font-size: 28px;
+  font-weight: 500;
+  align-items: center;
+  left: 1423px;
+  top: 53px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 18px;
 }

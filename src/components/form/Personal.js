@@ -77,7 +77,6 @@ const Personal = () => {
       type: file.type,
     });
     const fileUrl = URL.createObjectURL(fileObject);
-    console.log(fileUrl);
     setData({
       ...data,
       personalInfo: {
@@ -231,7 +230,9 @@ const Personal = () => {
             />
           </form>
         </div>
-        <Resume props={data} />
+        <div className="resume">
+          <Resume props={data} />
+        </div>
       </div>
     </>
   );

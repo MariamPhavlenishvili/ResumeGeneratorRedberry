@@ -20,8 +20,8 @@ const Experience = () => {
         id: 1,
         position: "",
         employer: "",
-        startDate: "",
-        endDate: "",
+        start_date: "",
+        due_date: "",
         description: "",
       },
     ],
@@ -47,8 +47,8 @@ const Experience = () => {
           id: formCount + 1,
           position: "",
           employer: "",
-          startDate: "",
-          endDate: "",
+          start_date: "",
+          due_date: "",
           description: "",
         },
       ],
@@ -108,7 +108,9 @@ const Experience = () => {
           </div>
         </div>
       </div>
-      <Resume props={data} />
+      <div className="resume">
+        <Resume props={data} />
+      </div>
     </div>
   );
 };
@@ -165,8 +167,8 @@ const Form = ({ form, onChange }) => {
             type="date"
             placeholder="mm / dd / yyyy"
             pattern="\d{2}/\d{2}/\d{4}"
-            {...register("startDate", { required: true })}
-            value={form.startDate}
+            {...register("start_date", { required: true })}
+            value={form.start_date}
             onChange={(e) => onChange(e, form.id)}
           />
         </div>
@@ -176,8 +178,8 @@ const Form = ({ form, onChange }) => {
             type="date"
             placeholder="mm / dd / yyyy"
             pattern="\d{2}/\d{2}/\d{4}"
-            {...register("endDate", { required: true })}
-            value={form.endDate}
+            {...register("due_date", { required: true })}
+            value={form.due_date}
             onChange={(e) => onChange(e, form.id)}
           />
         </div>

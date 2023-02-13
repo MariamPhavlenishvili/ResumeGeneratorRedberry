@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import axios from "axios";
 
 import Resume from "../Resume";
 import "./style.css";
@@ -12,15 +14,16 @@ const Education = () => {
   const navigate = useNavigate();
 
   const [formCount, setFormCount] = useState(1);
+  const [image, setImage] = useState({});
   const [data, setData] = useState({
     personalInfo: storedData.personalInfo,
     experience: storedData.experience,
     education: [
       {
         id: 1,
-        school: "",
-        degree: "",
-        startDate: "",
+        institute: "",
+        degree_id: "",
+        due_date: "",
         description: "",
       },
     ],
@@ -40,6 +43,7 @@ const Education = () => {
       return form;
     });
     setData({ ...data, education: updatedForms });
+    console.log(data);
     localStorage.setItem("data", JSON.stringify(data));
   };
 
@@ -51,9 +55,9 @@ const Education = () => {
         ...data.education,
         {
           id: formCount + 1,
-          school: "",
-          degree: "",
-          startDate: "",
+          institute: "",
+          degree_id: "",
+          due_date: "",
           description: "",
         },
       ],
@@ -64,9 +68,35 @@ const Education = () => {
     localStorage.removeItem("data");
   };
 
-  const onSubmit = () => {
-    localStorage.setItem("data", JSON.stringify(data));
-    navigate("/result");
+  const onSubmit = (event) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(data.personalInfo.file);
+    reader.onloadend = () => {
+      setImage({
+        image: URL.createObjectURL(data.personalInfo.file),
+        userImage: reader.result,
+      });
+    };
+
+    event.preventDefault();
+
+    axios
+      .post("https://resume.redberryinternship.ge/api/cvs", {
+        name: data.personalInfo.firstname,
+        surname: data.personalInfo.lastname,
+        email: data.personalInfo.email,
+        phone_number: data.personalInfo.phone,
+        image: image.userImage,
+        about_me: data.personalInfo.about,
+        experiences: data.experience,
+        educations: data.education,
+      })
+      .then(() => {
+        navigate("/result");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const onBack = () => {
@@ -100,13 +130,15 @@ const Education = () => {
             <input
               className="submit"
               onClick={onSubmit}
-              value={"შემდეგი"}
+              value={"დასრულება"}
               type="submit"
             />
           </div>
         </div>
       </div>
-      <Resume props={data} />
+      <div className="resume">
+        <Resume props={data} />
+      </div>
     </div>
   );
 };
@@ -118,21 +150,34 @@ const Form = ({ form, onChange }) => {
     formState: { errors },
   } = useForm();
 
+  const [degrees, setDegrees] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://resume.redberryinternship.ge/api/degrees")
+      .then((response) => {
+        setDegrees(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <form action="" className="content">
       <div className="form-div form-content">
-        <label htmlFor="school" type="text">
+        <label htmlFor="institute" type="text">
           განათლება
         </label>
         <div>
           <input
             type="text"
-            {...register("school", {
+            {...register("institute", {
               required: true,
               minLength: 2,
             })}
             onChange={(e) => onChange(e, form.id)}
-            value={form.school}
+            value={form.institute}
             placeholder="სასწავლებელი"
           />
         </div>
@@ -142,31 +187,30 @@ const Form = ({ form, onChange }) => {
         <div className="form-div form-content">
           <label htmlFor="degree">ხარისხი</label>
           <select
-            name="degree"
+            name="degree_id"
             onChange={(e) => onChange(e, form.id)}
-            value={form.degree ? form.degree : "აირჩიეთ ხარისხი"}
+            value={form.degree_id}
           >
-            <option value="საშუალო სკოლა">საშუალო სკოლა</option>
-            <option value="ზოგადსაგანმანათლებლო დიპლომი">
-              ზოგადსაგანმანათლებლო დიპლომი
-            </option>
-            <option value="ბაკალავრი">ბაკალავრი</option>
-            <option value="მაგისტრი">მაგისტრი</option>
-            <option value="დოქტორი">დოქტორი</option>
-            <option value="ასოცირებული ხარისხი">ასოცირებული ხარისხი</option>
-            <option value="სტუდენტი">სტუდენტი</option>
-            <option value="კოლეჯი">კოლეჯი</option>
-            <option value="სხვა">სხვა</option>
+            {degrees.map((option) => (
+              <Fragment>
+                <option value="აირჩიეთ ხარისხი" hidden disabled>
+                  აირჩიეთ ხარისხი
+                </option>
+                <option key={"option" + option.id} value={option.id}>
+                  {option.title}
+                </option>
+              </Fragment>
+            ))}
           </select>
         </div>
         <div className="form-div form-content">
-          <label htmlFor="startDate">დამთავრების რიცხვი</label>
+          <label htmlFor="endDate">დამთავრების რიცხვი</label>
           <input
             type="date"
             placeholder="mm / dd / yyyy"
             pattern="\d{2}/\d{2}/\d{4}"
-            {...register("endDate", { required: true })}
-            value={form.endDate}
+            {...register("due_date", { required: true })}
+            value={form.due_date}
             onChange={(e) => onChange(e, form.id)}
           />
         </div>
