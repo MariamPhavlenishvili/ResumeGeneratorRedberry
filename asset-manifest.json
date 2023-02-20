@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/%7BResumeGeneratorRedberry%7D/static/css/main.1f1f7d3d.css",
-    "main.js": "/%7BResumeGeneratorRedberry%7D/static/js/main.e12c597c.js",
-    "static/js/787.3ec2375e.chunk.js": "/%7BResumeGeneratorRedberry%7D/static/js/787.3ec2375e.chunk.js",
-    "static/media/background.png": "/%7BResumeGeneratorRedberry%7D/static/media/background.832365579848b64968d0.png",
-    "static/media/HelveticaNeue.ttc": "/%7BResumeGeneratorRedberry%7D/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
-    "static/media/LOGO-40.png": "/%7BResumeGeneratorRedberry%7D/static/media/LOGO-40.065c53f5e3d5d6fd73f9.png",
-    "static/media/email.svg": "/%7BResumeGeneratorRedberry%7D/static/media/email.940654db9dd5bf6109ec4ed3fb7ef087.svg",
-    "static/media/Warning.svg": "/%7BResumeGeneratorRedberry%7D/static/media/Warning.f94571fceec02076c55ea05f1184c245.svg",
-    "static/media/close.svg": "/%7BResumeGeneratorRedberry%7D/static/media/close.66d47612bbd8f1bd6f976dd5788f083f.svg",
-    "static/media/mobile.svg": "/%7BResumeGeneratorRedberry%7D/static/media/mobile.52a69cc71e267acb7c6acfcc88401a43.svg",
-    "index.html": "/%7BResumeGeneratorRedberry%7D/index.html",
-    "static/media/Vector.svg": "/%7BResumeGeneratorRedberry%7D/static/media/Vector.838cd184ad74f9566533042f992fb1e7.svg",
-    "main.1f1f7d3d.css.map": "/%7BResumeGeneratorRedberry%7D/static/css/main.1f1f7d3d.css.map",
-    "main.e12c597c.js.map": "/%7BResumeGeneratorRedberry%7D/static/js/main.e12c597c.js.map",
-    "787.3ec2375e.chunk.js.map": "/%7BResumeGeneratorRedberry%7D/static/js/787.3ec2375e.chunk.js.map"
+    "main.css": "/ResumeGeneratorRedberry/static/css/main.ad641e64.css",
+    "main.js": "/ResumeGeneratorRedberry/static/js/main.a4894433.js",
+    "static/js/787.3ec2375e.chunk.js": "/ResumeGeneratorRedberry/static/js/787.3ec2375e.chunk.js",
+    "static/media/background.png": "/ResumeGeneratorRedberry/static/media/background.832365579848b64968d0.png",
+    "static/media/HelveticaNeue.ttc": "/ResumeGeneratorRedberry/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
+    "static/media/LOGO-40.png": "/ResumeGeneratorRedberry/static/media/LOGO-40.065c53f5e3d5d6fd73f9.png",
+    "static/media/email.svg": "/ResumeGeneratorRedberry/static/media/email.940654db9dd5bf6109ec4ed3fb7ef087.svg",
+    "static/media/Warning.svg": "/ResumeGeneratorRedberry/static/media/Warning.f94571fceec02076c55ea05f1184c245.svg",
+    "static/media/close.svg": "/ResumeGeneratorRedberry/static/media/close.66d47612bbd8f1bd6f976dd5788f083f.svg",
+    "static/media/mobile.svg": "/ResumeGeneratorRedberry/static/media/mobile.52a69cc71e267acb7c6acfcc88401a43.svg",
+    "index.html": "/ResumeGeneratorRedberry/index.html",
+    "static/media/Vector.svg": "/ResumeGeneratorRedberry/static/media/Vector.838cd184ad74f9566533042f992fb1e7.svg",
+    "main.ad641e64.css.map": "/ResumeGeneratorRedberry/static/css/main.ad641e64.css.map",
+    "main.a4894433.js.map": "/ResumeGeneratorRedberry/static/js/main.a4894433.js.map",
+    "787.3ec2375e.chunk.js.map": "/ResumeGeneratorRedberry/static/js/787.3ec2375e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1f1f7d3d.css",
-    "static/js/main.e12c597c.js"
+    "static/css/main.ad641e64.css",
+    "static/js/main.a4894433.js"
   ]
 }
