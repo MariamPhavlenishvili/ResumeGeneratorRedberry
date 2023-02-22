@@ -9,11 +9,11 @@ import Result from "./components/form/Result";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/personal-info" element={<PersonalInfo />} />
-      <Route path="/experience" element={<Experience />} />
-      <Route path="/education" element={<Education />} />
-      <Route path="/result" element={<Result />} />
+      <Route path="https://mariamphavlenishvili.github.io/ResumeGeneratorRedberry/" element={<Landing />} />
+      <Route path="https://mariamphavlenishvili.github.io/ResumeGeneratorRedberry/personal-info" element={<PersonalInfo />} />
+      <Route path="https://mariamphavlenishvili.github.io/ResumeGeneratorRedberry/experience" element={<Experience />} />
+      <Route path="https://mariamphavlenishvili.github.io/ResumeGeneratorRedberry/education" element={<Education />} />
+      <Route path="https://mariamphavlenishvili.github.io/ResumeGeneratorRedberry/result" element={<Result />} />
     </Routes>
   );
 }
