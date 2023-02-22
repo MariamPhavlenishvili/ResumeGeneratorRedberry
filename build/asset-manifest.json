@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ResumeGeneratorRedberry/static/css/main.ad641e64.css",
+    "main.js": "/ResumeGeneratorRedberry/static/js/main.02176be7.js",
+    "static/js/787.3ec2375e.chunk.js": "/ResumeGeneratorRedberry/static/js/787.3ec2375e.chunk.js",
+    "static/media/background.png": "/ResumeGeneratorRedberry/static/media/background.832365579848b64968d0.png",
+    "static/media/HelveticaNeue.ttc": "/ResumeGeneratorRedberry/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
+    "static/media/LOGO-40.png": "/ResumeGeneratorRedberry/static/media/LOGO-40.065c53f5e3d5d6fd73f9.png",
+    "static/media/email.svg": "/ResumeGeneratorRedberry/static/media/email.a08888e4d12f1d22fbc6cabdd11a5123.svg",
+    "static/media/Warning.svg": "/ResumeGeneratorRedberry/static/media/Warning.f94571fceec02076c55ea05f1184c245.svg",
+    "static/media/close.svg": "/ResumeGeneratorRedberry/static/media/close.6869c128916b8d7a0f3f90a339d08f3e.svg",
+    "static/media/mobile.svg": "/ResumeGeneratorRedberry/static/media/mobile.fcde946174371a8fcc05a749a28660c0.svg",
+    "index.html": "/ResumeGeneratorRedberry/index.html",
+    "static/media/Vector.svg": "/ResumeGeneratorRedberry/static/media/Vector.838cd184ad74f9566533042f992fb1e7.svg",
+    "main.ad641e64.css.map": "/ResumeGeneratorRedberry/static/css/main.ad641e64.css.map",
+    "main.02176be7.js.map": "/ResumeGeneratorRedberry/static/js/main.02176be7.js.map",
+    "787.3ec2375e.chunk.js.map": "/ResumeGeneratorRedberry/static/js/787.3ec2375e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad641e64.css",
+    "static/js/main.02176be7.js"
+  ]
+}
